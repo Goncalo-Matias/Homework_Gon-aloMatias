@@ -1,60 +1,72 @@
 ---
 title: "Homework Gonçalo Matias"
 bibliography: Bib_Homework.bib
-output:
-  pdf_document: default
-  html_notebook: default
+output: html_notebook
 ---
+
+
 <style>
 body {
 text-align: justify}
 </style>
 
-### **Question**
 
+### **Question**
 
 What is the effect of forest certification (FSC scheme) on mammal's activity pattern?
 
+![](http://wildforests.pt/wp-content/uploads/2014/07/eucaliptos-820x490.jpg)
+
+\newpage
 
 #### **Variables**
 
+##### **Dependent**
 
-##### **Dependent** 
-
-- Activity pattern of each mammal species (probability density function of the distribution that describes the probability of an animal location being taken within any particular interval of the day)
-
+-   Activity pattern of each mammal species (probability density function of the distribution that describes the probability of an animal location being taken within any particular interval of the day)
 
 ##### **Independent**
 
-- Season (wet/dry)
-- Habitat type (Eucalytpus/Native)
-- Forest certification type (Eucalyptus FSC/Eucalytpus Uncertified/Proteted area)
-
+-   Season (wet/dry)
+-   Habitat type (Eucalytpus/Native)
+-   Forest certification type (Eucalyptus FSC/Eucalytpus Uncertified/Proteted area)
 
 #### **Protocol**
 
+##### **Sampling design**
 
-##### **Sampling design** 
+I will implement a camera-trapping scheme (Fig. 1) across nine sampling areas in Central Portugal (Fig. 2). These sampling areas will include six Eucalyptus-dominated landscapes (three areas with FSC certification and three without) and three native vegetation control areas (e.g., protected areas with native species). In each sampling area, I'll set a grid of 25 camera traps, 1 km apart, active for 30 consecutive days per season (wet, January--May 2023-2024; dry, June--September 2023-2024). Cameras (Cuddeback Model H-1453) will be set at a height of 50 cm by attaching them to tree trunks or wooden stakes. Each camera will register species presence at a minimum of 30-s intervals between consecutive photos. I'll record the day and legal (standard) time of each photo capture and only consider independent detection events for analyses, i.e., photos separated by a minimum interval of 30 min [@boitani2016camera]. Each detection event will be converted to solar time (i.e., time according to the position of the sun in the sky relative to one specific location on the ground).
 
-I will implement a camera-trapping scheme across nine sampling areas in Central Portugal. These sampling areas will include six Eucalyptus-dominated landscapes (three areas with FSC certification and three without) and three native vegetation control areas (e.g., protected areas with native species).
-In each sampling area, I'll set a grid of 25 camera traps, 1 km apart, active for 30 consecutive days per season (wet, January–May 2023-2024; dry, June–September 2023-2024). Cameras (Cuddeback Model H-1453) will be set at a height of 50 cm by attaching them to tree trunks or wooden stakes. Each camera will register species presence at a minimum of 30-s intervals between consecutive photos. I'll record the day and legal (standard) time of each photo capture and only consider independent detection events for analyses, i.e., photos separated by a minimum interval of 30 min [@boitani2016camera]. Each detection event will be converted to solar time (i.e., time according to the position of the sun in the sky relative to one specific location on the ground).
+**Figure 1.** Camera-trap set in a tree
 
-##### **Data analysis** 
+![](http://wildforests.pt/wp-content/uploads/2019/10/armadilhagem-foto2-800x490.png)
 
-Activity patterns will be estimated for each terrestrial mammal species based on the approach of [@ridout2009estimating]. I will use camera-trap data to generate kernel density curves (example in Fig. 1) to illustrate mammal's activity patterns, which will be determined for the overall dataset, as well as for three pairs of data subsets: 1) wet and dry season; 2) Eucalyptus plantations and native habitats; and 3) Eucalyptus FSC, Eucalyptus non-FSC, and protected areas. Next, to compare activity patterns between paired data subsets I will estimate the coefficient of overlap Δ [@meredith2014overview], which ranges from 0 (no overlap) to 1 (complete overlap) [@ridout2009estimating]. To estimate Δ 95% confidence intervals, I'll use a bootstrap approach on 999 replicates [@meredith2014overview]. To facilitate qualitative analysis of results, I'll adopt a categorization of overlap approach [@monterroso2014plasticity]: low overlap = Δ ≤ 50th sample percentile; moderate overlap = 50th percentile < Δ ≤ 75th percentile; high overlap = Δ > 75th percentile. 
-All analyses will be conducted in R [@team2013r], using the R-packages overlap [@meredith2014overview] and circular [agostinelli2013r].
+**Figure 2.** Broad study areas region in central Portugal
+
+![](C:/Users/gonca/OneDrive/Ambiente%20de%20Trabalho/Study_area.png)
+
+\newpage
+
+##### **Data analysis**
+
+Activity patterns will be estimated for each terrestrial mammal species (e.g., Fig. 3) based on the approach of [@ridout2009estimating]. I will use camera-trap data to generate kernel density curves (example in Fig. 4) to illustrate mammal's activity patterns, which will be determined for the overall dataset, as well as for three pairs of data subsets: 1) wet and dry season; 2) Eucalyptus plantations and native habitats; and 3) Eucalyptus FSC, Eucalyptus non-FSC, and protected areas. Next, to compare activity patterns between paired data subsets I will estimate the coefficient of overlap Δ [@meredith2014overview], which ranges from 0 (no overlap) to 1 (complete overlap) [@ridout2009estimating]. To estimate Δ 95% confidence intervals, I'll use a bootstrap approach on 999 replicates [@meredith2014overview]. To facilitate qualitative analysis of results, I'll adopt a categorization of overlap approach [@monterroso2014plasticity]: low overlap = Δ ≤ 50th sample percentile; moderate overlap = 50th percentile \< Δ ≤ 75th percentile; high overlap = Δ \> 75th percentile. All analyses will be conducted in R [@team2013r], using the R-packages overlap [@meredith2014overview] and circular [agostinelli2013r].
 
 I also aim to assess if mammal community will display any preference for a specific period of the circadian cycle (day, 1 h after sunrise to 1 h before sunset; sunset, 1 h before sunset to 1 h after it; night, 1 h after sunset to 1 h before sunrise; sunrise, 1 h before sunrise to 1 h after it) by estimating the Jacobs selectivity index (JSI, ranging from −1 (avoidance) to 1 (preference); [@jacobs1974quantitative] for the overall dataset and paired subsets. I'll use a bootstrap approach, based on 999 replicates, to estimate JSI (mean and standard deviation, SD) per period. Differences between JSI estimates per period will be tested using t-tests [@zar1999biostatistical].
 
+**Figure 3.** Example of target mammal species.
 
-*Figure 1.* Example of an activity pattern of wild boar (Sus scrofa).   
+![](C:/Users/gonca/OneDrive/Ambiente%20de%20Trabalho/Mammals.png)
 
-![](https://media.springernature.com/full/springer-static/image/art%3A10.1007%2Fs13364-022-00632-8/MediaObjects/13364_2022_632_Fig2_HTML.png?as=webp)
+**Figure 4.** Example of an activity pattern of wild boar (Sus scrofa).
 
+![](https://media.springernature.com/full/springer-static/image/art%253A10.1007%252Fs13364-022-00632-8/MediaObjects/13364_2022_632_Fig2_HTML.png?as=webp)
+
+\newpage
 
 #### **Why this approach?**
 
-This results will allow me to identify behavior changes associated with the management of the plantations (including those actions linked to certification vs non-certification) and how this influences the population’s temporal structure. Overall, with this task, I also aim to identify the most critical phase of eucalyptus plantation’s cycles to species life cycle periods (e.g. breeding season), to inform managers of adequate management actions to minimize impacts.
+This results will allow me to identify behavior changes associated with the management of the plantations (including those actions linked to certification vs non-certification) and how this influences the population's temporal structure. Overall, with this task, I also aim to identify the most critical phase of eucalyptus plantation's cycles to species life cycle periods (e.g. breeding season), to inform managers of adequate management actions to minimize impacts.
+
+\newpage
 
 ### **Citations**
-
